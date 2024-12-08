@@ -6,7 +6,7 @@ RUN useradd -m ansible
 
 # Install system dependencies as root
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip python3-venv sshpass && \
+    apt-get install -y python3 python3-pip python3-venv sshpass sudo && \
     rm -rf /var/lib/apt/lists/*
 
 # Set up virtual environment and install Ansible as the non-root user
