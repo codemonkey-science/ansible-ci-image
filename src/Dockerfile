@@ -6,7 +6,7 @@ RUN useradd -m ansible
 
 # Install system dependencies as root
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip python3-venv sshpass sudo && \
+    apt-get install -y python3 python3-pip python3-venv sshpass sudo acl && \
     rm -rf /var/lib/apt/lists/*
 
 # Set up virtual environment and install Ansible as the non-root user
@@ -44,7 +44,9 @@ RUN mkdir -p /__w && \
 # Github actions will make the workspace available at /github sometimes
 RUN mkdir -p /github && \
     chown -R ansible:ansible /github && \
-    chmod -R 777 /github
+    chmod -R 777 /github && \
+    setfacl -dR -m u:ansible:rwx /github && \
+    setfacl -R -m u:ansible:rwx /github
 
 # Switch back to the ansible user
 USER ansible
