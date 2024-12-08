@@ -41,5 +41,10 @@ RUN mkdir -p /__w && \
     chown -R ansible:ansible /__w && \
     chmod -R 777 /__w
 
+# Github actions will make the workspace available at /github sometimes
+RUN mkdir -p /github && \
+    chown -R ansible:ansible /github && \
+    chmod -R 777 /github
+
 # Switch back to the ansible user
 USER ansible
