@@ -44,3 +44,21 @@ jobs:
 
       - name: Log out from GitHub Container Registry
         run: docker logout ghcr.io
+
+      - name: Clean up old versions
+        run: |
+          # Get a list of all versions of the container image
+          versions=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/ansible-ci-image/versions" | jq -r '.[].id')
+
+          # Keep the latest 5 versions and delete the rest
+          count=0
+          for version in $versions; do
+            count=$((count + 1))
+            if [ $count -gt 5 ]; then
+              curl -X DELETE -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+                -H "Accept: application/vnd.github.v3+json" \
+                "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/ansible-ci-image/versions/$version"
+            fi
+          done
