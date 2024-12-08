@@ -39,7 +39,7 @@ RUN chown -R ansible:ansible /home/ansible && \
 # Ensure the ansible user has permissions for the GitHub Actions workspace
 RUN mkdir -p /__w && \
     chown -R ansible:ansible /__w && \
-    chmod -R 755 /__w
+    chmod -R 777 /__w
 
 # Switch back to the ansible user
 USER ansible
