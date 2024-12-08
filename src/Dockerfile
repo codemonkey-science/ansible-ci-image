@@ -28,3 +28,18 @@ RUN mkdir /home/ansible/workspace
 
 # Set the working directory to the workspace
 WORKDIR /home/ansible/workspace
+
+# Switch back to root to set permissions
+USER root
+
+# Set permissions for the ansible user
+RUN chown -R ansible:ansible /home/ansible && \
+    chmod -R 755 /home/ansible
+
+# Ensure the ansible user has permissions for the GitHub Actions workspace
+RUN mkdir -p /__w && \
+    chown -R ansible:ansible /__w && \
+    chmod -R 755 /__w
+
+# Switch back to the ansible user
+USER ansible
