@@ -9,6 +9,9 @@ RUN apt-get update && \
     apt-get install -y python3 python3-pip python3-venv sshpass sudo acl && \
     rm -rf /var/lib/apt/lists/*
 
+# Set the HOME environment variable for the ansible user
+ENV HOME=/home/ansible
+
 # Set up virtual environment and install Ansible as the non-root user
 USER ansible
 
