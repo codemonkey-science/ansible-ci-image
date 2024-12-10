@@ -1,6 +1,6 @@
 # ansible-ci-image
 
-[![Build and Push Docker Image](https://github.com/codemonkey-science/ansible-ci-image/actions/workflows/build-and-push.yaml/badge.svg)](https://github.com/codemonkey-science/ansible-ci-image/actions/workflows/build-and-push.yaml)
+[![CI/CD Pipeline (self-hosted)](https://github.com/codemonkey-science/ansible-ci-image/actions/workflows/build-and-push.yaml/badge.svg)](https://github.com/codemonkey-science/ansible-ci-image/actions/workflows/build-and-push.yaml)
 
 Container image used for Ansible-based GitHub Actions. Without this image, every time you run an Ansible job, it takes a bit to install and update software. Instead, this has:
 
